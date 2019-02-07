@@ -1,7 +1,7 @@
 # aptitude_test
 WebDev Guidance Aptitude Test
 
-*Students Must Login to their accounts</br>
+*Users Must Login to their accounts</br>
 *Only Students Will Vote</br>
 *Students comments will sent anonymously</br>
 *Students only vote for(to) their subject teachers</br>
