@@ -1,17 +1,23 @@
 <?php
 	include "connect.php";
 	session_start();
+	if(!empty($_SESSION["row"]["name"])){
+	}
+	else{
+		header("Location: login.php");
+	}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student</title>
+	<title>Home</title>
 </head>
 <body>
-	<center>
-		<?php
-			echo "Hello " . $_SESSION['row']['name'];
-		?>
+	<?php
+		echo "<center><h1>Hello, " . $_SESSION["row"]["name"] . "</h1>";
+	?>
+	<a href="logout.php">Logout</a>
 	</center>
 </body>
 </html>

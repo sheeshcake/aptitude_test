@@ -28,7 +28,7 @@
 			document.getElementById("entry").innerHTML = "ID-Number: C<input type='number' min='01' max='99'style='width:30px' name='yr'>-<input type='number' style='width:50px' name='num'>";
 		}
 		function other_entry(){
-			document.getElementById("entry").innerHTML = "Username<input type='username' id='username' id='username'>";
+			document.getElementById("entry").innerHTML = "Username<input type='text' id='username' name='username'>";
 		}
 
 
