@@ -6,20 +6,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="css/lgn_style.css">
 	<title>Login</title>
 </head>
 <body>
-	<center>
-		<form method="post" action="login_controller.php">
-			<p id="entry">What the fuck are you?</p>
-			<p>
-				<input type="radio" onclick="student_entry();" name="department" id="student" value="student" required>I'm a fucking Student
-				<input type="radio" onclick="other_entry();" id="other" name="department" value="other" required>I'm a fucking Dean or Teacher
-			</p>
-			<p id="pass_entry"></p>
-			<p id="login_btn"></p>
-		</form>
-	</center>
+	<div class="nav">
+		<ul>
+			<li><a href="index.php">Home</a></li>
+			<li style="float:right;background-color: #69b6ff;" class="active"><a href="#">Login</a></li>
+			<li style="float:right;"><a href="register.php">Register</a></li>
+		</ul>
+	</div>
+	<div id="lgn" class="login">
+		<center id="comp">
+			<form method="post" action="login_controller.php">
+				<p id="entry">What are you?</p>
+				<p>
+					<input type="radio" onclick="student_entry();" name="department" id="student" value="student" required>I'm a Student
+					<input type="radio" onclick="other_entry();" id="other" name="department" value="other" required>I'm a Dean or Teacher
+				</p>
+				<p id="pass_entry"></p>
+				<p id="login_btn"></p>
+			</form>
+		</center>
+	</div>
+
 
 
 	<script>
