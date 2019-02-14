@@ -1,6 +1,8 @@
 <?php
-	if(!empty($_SESSION['row'])){
-		header("Location: home_students.php");
+	include "connect.php";
+	session_start();
+	if(!empty($_SESSION['row']['name'])){
+		header("Location: home_student.php");
 	}
 ?>
 <!DOCTYPE html>

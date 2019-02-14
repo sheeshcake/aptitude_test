@@ -19,7 +19,7 @@ html{
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.login{
+.register{
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
 	border-style: solid;
 	border-width: 1px;
@@ -29,9 +29,15 @@ html{
 	background-color: #fff;
 }
 
-.login .comp{
-	padding: 5% 0 5% 0;
+
+.comp{
+  padding: 5% 15% 10% 15%;
 }
+
+button{
+  margin: 5%;
+}
+
 
 ul {
   list-style-type: none;
@@ -60,11 +66,8 @@ li a:hover:not(.active) {
   background-color:#1e88e5;
 }
 
-@media (max-width: 600px) {
-	.login{
+@media (max-width: 800px) {
+	.register{
 		margin: 30% 5% 0% 5%;
-	}
-	.login .comp{
-		padding: 10% 0 10% 0;
 	}
 }

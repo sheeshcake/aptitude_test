@@ -171,7 +171,8 @@
 	</section>
 	<?php
 		if(isset($_SESSION['row'])){
-			echo "<script type='text/javascript'>"; 
+			echo "<script type='text/javascript'>";
+			echo "document.getElementById('prof').innerHTML = " . '"' . "<a href='" . "home_student.php" . "'>Rate Now</a>" . '";';
 			echo "document.getElementById('lgged').innerHTML = " . '"' . "<a href='" . "logout.php" . "'>Logout</a>" . '";';
 			echo "</script>";
 
