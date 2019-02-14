@@ -1,40 +1,48 @@
-* {
-  box-sizing: border-box;
+*{
+	box-sizing: border-box;
 }
 body{
 	font: 14px/1.21 Roboto, 'Helvetica Neue', arial, helvetica, sans-serif;
 	margin: 0 auto;
 }
 
-
 html{
   background-image: url("../img/smc.png");
-  background-size: 40%; 
+  background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
 }
 
-.main{
-	padding: 4% 2% 3% 2%;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #c7c7c7;
-	border-radius: 5px;
-  background-color: #fff;
-	margin: 5% 2% 2% 2%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 .nav{
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.register{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+	border-style: solid;
+	border-width: 1px;
+	border-color: #c7c7c7;
+	border-radius: 5px;
+	margin: 10% 35% 0 35%;
+	background-color: #fff;
+}
+
+.comp{
+  padding: 5% 15% 10% 15%;
+}
+
+button{
+  margin: 5%;
+}
+
+
 ul {
+  list-style-type: none;
   position: fixed;
   top: 0;
   width: 100%;
-  list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -57,6 +65,8 @@ li a:hover:not(.active) {
   background-color:#1e88e5;
 }
 
-.active{
-	background-color: #69b6ff;
+@media (max-width: 800px) {
+	.register{
+		margin: 30% 5% 0% 5%;
+	}
 }

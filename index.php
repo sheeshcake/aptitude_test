@@ -1,5 +1,6 @@
 <?php
 	include "connect.php";
+	session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,8 +15,8 @@
 			<li class="active"><a href="#home">Home</a></li>
 			<li><a href="#info">Info</a></li>
 			<li><a href="#about">About</a></li>
-			<li class="right" style="float:right;"><a href="login.php">Login</a></li>
-			<li class="right" style="float:right;"><a href="register.php">Register</a></li>
+			<li id="lgged" class="right" style="float:right;"> </li>
+			<li id="prof" class="right" style="float:right;"><a href="register.php">Register</a></li>
 		</ul>
 	</div>
 	<section id="home">
@@ -168,5 +169,18 @@
 			</p>
 		</div>
 	</section>
+	<?php
+		if(isset($_SESSION['row'])){
+			echo "<script type='text/javascript'>"; 
+			echo "document.getElementById('lgged').innerHTML = " . '"' . "<a href='" . "logout.php" . "'>Logout</a>" . '";';
+			echo "</script>";
+
+		}
+		else{
+			echo "<script type='text/javascript'>"; 
+			echo "document.getElementById('lgged').innerHTML = " . '"' . "<a href='" . "login.php" . "'>Login</a>" . '";';
+			echo "</script>";
+		}
+	?>
 </body>
 </html>

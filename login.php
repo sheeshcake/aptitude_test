@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="css/lgn_style.css">
 	<title>Login</title>
 </head>
@@ -18,17 +19,18 @@
 		</ul>
 	</div>
 	<div id="lgn" class="login">
-		<center id="comp">
-			<form method="post" action="login_controller.php">
-				<p id="entry">What are you?</p>
-				<p>
+		<center><h1>Login</h1></center>
+		<form method="post" action="login_controller.php">
+			<center class="comp">
+				<p id="entry">?</p>
+				<center><p>
 					<input type="radio" onclick="student_entry();" name="department" id="student" value="student" required>I'm a Student
 					<input type="radio" onclick="other_entry();" id="other" name="department" value="other" required>I'm a Dean or Teacher
-				</p>
+				</p></center>
 				<p id="pass_entry"></p>
 				<p id="login_btn"></p>
-			</form>
-		</center>
+			</center>
+		</form>
 	</div>
 
 

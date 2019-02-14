@@ -1,7 +1,17 @@
+*{
+	box-sizing: border-box;
+}
 body{
-	background: #fafafa;
 	font: 14px/1.21 Roboto, 'Helvetica Neue', arial, helvetica, sans-serif;
 	margin: 0 auto;
+}
+
+html{
+  background-image: url("../img/smc.png");
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 
@@ -10,25 +20,24 @@ body{
 }
 
 .login{
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	position: center;
-	margin-left: 35%;
-	margin-right: 35%;
-	margin-top: 10%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
 	border-style: solid;
 	border-width: 1px;
 	border-color: #c7c7c7;
 	border-radius: 5px;
-	background: white;
+	margin: 10% 35% 0 35%;
+	background-color: #fff;
 }
 
-.login #comp{
-	padding: 5%;
-	padding-top: 2%;
+.login .comp{
+	padding: 5% 0 5% 0;
 }
 
 ul {
   list-style-type: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -49,4 +58,13 @@ li a {
 
 li a:hover:not(.active) {
   background-color:#1e88e5;
+}
+
+@media (max-width: 600px) {
+	.login{
+		margin: 30% 5% 0% 5%;
+	}
+	.login .comp{
+		padding: 10% 0 10% 0;
+	}
 }
