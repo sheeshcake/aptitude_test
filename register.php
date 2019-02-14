@@ -9,8 +9,8 @@
 	<div class="nav">
 		<ul>
 			<li><a href="index.php">Home</a></li>
-			<li style="float:right;background-color: #69b6ff;" class="active"><a href="#">Login</a></li>
-			<li style="float:right;"><a href="register.php">Register</a></li>
+			<li style="float:right;" class="active"><a href="login.php">Login</a></li>
+			<li style="float:right;background-color: #69b6ff;"><a href="#">Register</a></li>
 		</ul>
 	</div>
 	<div id="rgstr" class="register">
