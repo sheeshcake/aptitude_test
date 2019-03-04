@@ -18,11 +18,21 @@
 		<form method="post" id="frm" action="registration_controller.php">
 			<div class="comp">
 				<p>Name<input style="float: right;" type="text" name="student_name" required></p>
-				<p>Departpemt<input style="float: right;" type="text" name="dept" placeholder="E.g CECS" required></p>
+				<p>Departpemt
+					<select name="dept" style="float: right; width: 145px;">
+						<option value="CECS">CECS</option>
+						<option value="CBAA">CBAA</option>
+						<option value="COC">COC</option>
+						<option value="CHRM">CHRM</option>
+						<option value="CON">CON</option>
+						<option value="CED">CED</option>
+						<option value="CAS">CAS</option>
+					</select>
+				</p>
 				<p>ID-Number<input style="float: right;" type="text" name="id_num" placeholder="C16-XXXX" required></p>
-				<p>Username<input style="float: right;" type="text" name="username" required></p>
+				<p>Username<input style="float: right;" type="text" name="usrnm" required></p>
 				<p>Password<input style="float: right;" id="psswrd" oninput="validate_pass();" type="password" name="password" required></p>
-				<p id="con">Re-type Password</p>
+				<center><p id="con"></p></center>
 				<p>Retype Password<input style="float: right;" id="re_password" oninput="validate_pass();" type="password" name="re_password" required></p>
 				<center><button name="submit">Submit</button></center>
 			</div>
@@ -36,12 +46,16 @@
 			var pass = document.getElementById("psswrd").value;
 			var re_pass = document.getElementById("re_password").value;
 			if(pass != re_pass){
-				document.getElementById("con").innerHTML = "<p style='color:red'>Password Does not Match!</p>";
+				document.getElementById("con").innerHTML = "<p class='re' style='color:red'>Password Does not Match!</p>";
 				document.getElementById("re_password").setCustomValidity("Passwords Don't Match");
 				
 			}
+			else if(pass == "" || re_pass == ""){
+				document.getElementById("con").innerHTML = "<p class='re'>Please Re-type Password</p>";
+				document.getElementById("re_password").setCustomValidity("Passwords Don't Match");
+			}
 			else{
-				document.getElementById("con").innerHTML = "<p style='color:green'>Password Matched!</p>";
+				document.getElementById("con").innerHTML = "<p class='re' style='color:green'>Password Matched!</p>";
 				document.getElementById("re_password").setCustomValidity('');
 			}
 		}

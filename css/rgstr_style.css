@@ -10,8 +10,10 @@ html{
   background-image: url("../img/smc.png");
   background-size: 40%;
   background-repeat: no-repeat;
+  
   background-position: center;
   background-attachment: fixed;
+  background-color: rgb(246,246,246);
 }
 
 
@@ -32,6 +34,10 @@ html{
 
 .comp{
   padding: 5% 15% 10% 15%;
+}
+
+.re{
+  font-size: 15px;
 }
 
 button{
@@ -70,4 +76,10 @@ li a:hover:not(.active) {
 	.register{
 		margin: 30% 5% 0% 5%;
 	}
+}
+
+@media (max-width: 1200px){
+  .register{
+    margin: 10% 5% 0% 5%;
+  }
 }

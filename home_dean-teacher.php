@@ -4,7 +4,7 @@
 	if(empty($_SESSION["row"]["teacher_name"])){
 		header("Location: login.php");
 	}
-	else if($_SESSION["row"]["user_type"] != "teacher"){
+	else if($_SESSION["row"]["user_type"] != "dean-teacher"){
 		header("Location: home_" . $_SESSION["row"]["user_type"] . ".php");
 	}
 ?>
@@ -19,6 +19,8 @@
 	<div class="nav">
 		<ul>
 			<li><a href="index.php">Home</a></li>
+			<li><a href="show_dept.php">Rating
+			s</a></li>
 			<li style="float:right;"><a href="logout.php">Logout</a></li>
 		</ul>
 	</div>
@@ -41,7 +43,7 @@
 		</div>
 		<div class="profile_col">
 			<?php
-				echo "<center><h1>Hello, Prof " . $_SESSION["row"]["teacher_name"] . "</h1></center>";
+				echo "<center><h1>Hello, Maam " . $_SESSION["row"]["teacher_name"] . "</h1></center>";
 			?>
 		</div>
 	</div>

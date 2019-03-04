@@ -1,6 +1,7 @@
 <?php
 	include "connect.php";
 	session_start();
+	$_SESSION["admin"] = false;
 	if(!empty($_SESSION['row']['name'])){
 		header("Location: home_student.php");
 	}
@@ -24,7 +25,7 @@
 		<center><h1>Login</h1></center>
 		<form method="post" action="login_controller.php">
 			<center class="comp">
-				<p id="entry">?</p>
+				<p id="entry"></p>
 				<center><p>
 					<input type="radio" onclick="student_entry();" name="department" id="student" value="student" required>I'm a Student
 					<input type="radio" onclick="other_entry();" id="other" name="department" value="other" required>I'm a Dean or Teacher
@@ -39,15 +40,25 @@
 
 	<script>
 		var pass_entry = false;
-		function student_entry(){
-			document.getElementById("entry").innerHTML = "ID-Number: C<input type='number' min='01' max='99'style='width:30px' name='yr'>-<input type='number' style='width:50px' name='num'>";
+		function use_username(){
+			document.getElementById("entry").innerHTML = "<p>Username<input type='username' name='usrnm'></p>";
+			add_pass();
+		}
+		function use_idnum(){
+			document.getElementById("entry").innerHTML = "<p>ID-Number: C<input type='number' min='01' max='99'style='width:30px' name='yr'>-<input type='number' style='width:50px' name='num'></p>";
 			pass_entry = true;
 			add_pass();
+		}
+		function student_entry(){
+			add_lgn_option();
 		}
 		function other_entry(){
 			document.getElementById("entry").innerHTML = "Username<input type='text' id='username' name='username'>";
 			pass_entry = true;
 			add_pass();
+		}
+		function add_lgn_option(){
+			document.getElementById("entry").innerHTML = "<input type='radio' onclick='use_username();'>Use Username<input type='radio' onclick='use_idnum()'>Use ID-Number";
 		}
 		function add_pass(){
 			document.getElementById("pass_entry").innerHTML = "Password<input type='password' name='password' id='password' required>"

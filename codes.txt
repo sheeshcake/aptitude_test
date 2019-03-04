@@ -1,0 +1,66 @@
+create table subject_line_t(
+student_id varchar(7) not null,
+subject_id int not null,
+teacher_id int not null,
+foreign key(student_id) references student_t(student_id),
+foreign key(subject_id) references subject_t(subject_id),
+foreign key(teacher_id) references teacher_t(teacher_id));
+
+insert into subject_t(subject_name)
+values
+("Computer Programming 2"),
+("Computer Programming in Java");
+
+
+create table subject_t (
+subject_id int auto_increment not null,
+subject_name varchar(30) not null,
+primary key(subject_id));
+
+insert into subject_line_t(student_id, teacher_id, subject_id) 
+(select student_t.student_id, teacher_t.teacher_id, subject_t.subject_id
+from student_t, teacher_t, subject_t where student_t.student_id = 'Foo' AND subject_t.subject_id = 'Bar' AND teacher_t.teacher_id = 'barr')
+
+select student_t.student_id, teacher_t.teacher_id, subject_t.subject_id from student_t, teacher_t, subject_t where student_t.student_id = 'Foo' AND subject_t.subject_id = 'Bar' AND teacher_t.teacher_id = 'barr'
+
+
+INSERT INTO subject_line_t(student_id, teacher_id, subject_id)
+SELECT
+    s.student_id, t.TaskID, 'N'
+FROM STUDENT s
+CROSS JOIN TASKS t
+
+
+insert into subject_line_t(student_id, teacher_id, subject_id)
+(select student_t.student_id, teacher_t.teacher_id, subject_t.subject_id
+from student_t, teacher_t, subject_t where student_t.student_id = 3 AND subject_t.subject_id = 1 AND teacher_t.teacher_id = 2);
+
+
+delete
+
+create table answer_t(
+answer_id int not null auto_increment primary key,
+answer varchar(30));
+
+create table question_t(
+question_id int not null auto_increment primary key,
+question varchar(45),
+answer_id int not null,
+foreign key(answer_id) references answer_t(answer_id));
+
+create table admin_t(
+admin_id int not null auto_increment primary key,
+admin_username varchar(30) not null,
+admin_password varchar(30) not null);
+
+create table rating_line_t(
+rating_id int not null auto_increment primary key,
+score int not null);
+
+create table questionare_line_t(
+question_id int,
+admin_id int,
+rating_id int,
+constraint answer_id foreign key(question_id) references question_t(question_id),
+foreign key(admin_id) references admin_t(admin_id),
+foreign key(rating_id) references rating_t(rating_id)) engine=innodb;
