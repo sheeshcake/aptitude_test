@@ -9,3 +9,7 @@ WebDev Guidance Aptitude Test
 *Teachers can see the students comments</br>
 *Dean's can only see the rating of the same department teachers</br>
 
+
+Please visit
+halfbyte.000webhostapp.com
+for testing
