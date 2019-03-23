@@ -61,7 +61,7 @@ li a:hover:not(.active) {
   background-color:#1e88e5;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
 	.login{
 		margin: 30% 5% 0% 5%;
 	}

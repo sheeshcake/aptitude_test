@@ -77,10 +77,13 @@
 			echo "<script type='text/javascript'>";
 			if(isset($_SESSION['row']['user_type'])){
 				if($_SESSION['row']['user_type'] == "dean"){
-					echo "document.getElementById('prof').innerHTML = " . '"' . "<a href='" . "home_student.php" . "'>Show Rates</a>" . '";';
+					echo "document.getElementById('prof').innerHTML = " . '"' . "<a href='" . "home_dean.php" . "'>Show Rates</a>" . '";';
 				}
 				else if($_SESSION['row']['user_type'] == "teacher"){
-					echo "document.getElementById('prof').innerHTML = " . '"' . "<a href='" . "home_student.php" . "'>Profile</a>" . '";';
+					echo "document.getElementById('prof').innerHTML = " . '"' . "<a href='" . "home_teacher.php" . "'>Profile</a>" . '";';
+				}
+				else if($_SESSION["row"]["user_type"] == "dean-teacher"){
+					echo "document.getElementById('prof').innerHTML = " . '"' . "<a href='" . "home_dean-teacher				.php" . "'>Profile</a>" . '";';
 				}
 			}
 			else{
@@ -96,5 +99,6 @@
 			echo "</script>";
 		}
 	?>
+	<footer><center><h3>C 2018 - 2019</h3></center></footer>
 </body>
 </html>

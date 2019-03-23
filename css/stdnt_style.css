@@ -12,7 +12,7 @@ body{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
 
 .row{
-  margin-top:6%; 
+  margin-top:10%; 
 }
 
 .profile{
@@ -73,8 +73,7 @@ li a:hover:not(.active) {
   padding: 1% 1% 1%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 5px;
-  margin: 0% 1% 2% 1%;
-  height: 500px; /* Should be removed. Only for demonstration */
+  margin: 0% 1% 2% 1%;/* Should be removed. Only for demonstration */
 }
 
 .profile_col {
@@ -90,13 +89,21 @@ li a:hover:not(.active) {
 }
 @media (max-width: 800px) {
   .row{
-    margin-top: 10%;
+    margin-top: 15%;
   }
   .subject_col {
+    margin: 0% 2% 0% 2%;
     width: 100%;
   }
   .profile_col {
+    margin: 5% 2% 0% 2%;
     width: 100%;
     height: 200px;
   }
+}
+
+input[type=radio] {
+  height: 2em;
+  width: 2em;
+  border: 0px;
 }

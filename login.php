@@ -2,8 +2,8 @@
 	include "connect.php";
 	session_start();
 	$_SESSION["admin"] = false;
-	if(!empty($_SESSION['row']['name'])){
-		header("Location: home_student.php");
+	if(!empty($_SESSION['row']['user_type'])){
+		header("Location: home_" . $_SESSION["row"]["user_type"] .  ".php");
 	}
 ?>
 <!DOCTYPE html>
@@ -23,14 +23,27 @@
 	</div>
 	<div id="lgn" class="login">
 		<center><h1>Login</h1></center>
-		<form method="post" action="login_controller.php">
+		<?php
+			include 'connect.php';
+			if(isset($_SESSION['reg'])){
+				if($_SESSION['reg']){
+					echo "<center><p style='color:green'>Account Successfully Registered!</p></center>";
+				}
+			}
+		?>
+		<form method="post" action="login_controller.php" id="lgn_form">
 			<center class="comp">
 				<p id="entry"></p>
-				<center><p>
-					<input type="radio" onclick="student_entry();" name="department" id="student" value="student" required>I'm a Student
-					<input type="radio" onclick="other_entry();" id="other" name="department" value="other" required>I'm a Dean or Teacher
-				</p></center>
 				<p id="pass_entry"></p>
+				<center><p>
+					<select name="department" onchange="changed(this.value);">
+						<option value="" disabled selected>User-Type</option>
+						<option value="student">I'm a student</option>
+						<option value="other">I'm a Dean or Teacher</option>
+					</select>
+<!-- 					<input type="radio" onclick="student_entry();" name="department" id="student" value="student" required>I'm a Student
+					<input type="radio" onclick="other_entry();" id="other" name="department" value="other" required>I'm a Dean or Teacher -->
+				</p></center>
 				<p id="login_btn"></p>
 			</center>
 		</form>
@@ -45,12 +58,17 @@
 			add_pass();
 		}
 		function use_idnum(){
-			document.getElementById("entry").innerHTML = "<p>ID-Number: C<input type='number' min='01' max='99'style='width:30px' name='yr'>-<input type='number' style='width:50px' name='num'></p>";
+			document.getElementById("entry").innerHTML = "<p>ID-Number: C<input type='text' pattern='\\d*' maxlength='2' style='width:50px' name='yr'>-<input type='text' style='width:70px' name='num' pattern='\\d*' maxlength='4'></p>";
 			pass_entry = true;
 			add_pass();
 		}
-		function student_entry(){
-			add_lgn_option();
+		function changed(val){
+			if(val == 'other'){
+				other_entry();
+			}
+			else{
+				add_lgn_option();
+			}
 		}
 		function other_entry(){
 			document.getElementById("entry").innerHTML = "Username<input type='text' id='username' name='username'>";
@@ -64,7 +82,6 @@
 			document.getElementById("pass_entry").innerHTML = "Password<input type='password' name='password' id='password' required>"
 			document.getElementById("login_btn").innerHTML = "<button type='submit' id='submit'>Log-in</button>"
 		}
-
 	</script>
 </body>
 </html>

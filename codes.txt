@@ -11,17 +11,44 @@ values
 ("Computer Programming 2"),
 ("Computer Programming in Java");
 
+//create table primary only
+
 
 create table subject_t (
 subject_id int auto_increment not null,
 subject_name varchar(30) not null,
 primary key(subject_id));
 
+
+//////////////////////////////////////////////
+
+
+//insert data into a associative table
+
+/////////////
 insert into subject_line_t(student_id, teacher_id, subject_id) 
 (select student_t.student_id, teacher_t.teacher_id, subject_t.subject_id
 from student_t, teacher_t, subject_t where student_t.student_id = 'Foo' AND subject_t.subject_id = 'Bar' AND teacher_t.teacher_id = 'barr')
 
+INSERT INTO bar (description, foo_id) VALUES
+    ( 'testing',     (SELECT id from foo WHERE type='blue') ),
+    ( 'another row', (SELECT id from foo WHERE type='red' ) );
+
 select student_t.student_id, teacher_t.teacher_id, subject_t.subject_id from student_t, teacher_t, subject_t where student_t.student_id = 'Foo' AND subject_t.subject_id = 'Bar' AND teacher_t.teacher_id = 'barr'
+
+
+//////////
+insert into subject_line_t(student_id, teacher_id, subject_id)
+(select student_t.student_id, teacher_t.teacher_id, subject_t.subject_id
+from student_t, teacher_t, subject_t where student_t.student_id = 3 AND subject_t.subject_id = 1 AND teacher_t.teacher_id = 2);
+
+
+
+//////////////////////////////////////////////////
+
+
+
+///cross join
 
 
 INSERT INTO subject_line_t(student_id, teacher_id, subject_id)
@@ -31,9 +58,10 @@ FROM STUDENT s
 CROSS JOIN TASKS t
 
 
-insert into subject_line_t(student_id, teacher_id, subject_id)
-(select student_t.student_id, teacher_t.teacher_id, subject_t.subject_id
-from student_t, teacher_t, subject_t where student_t.student_id = 3 AND subject_t.subject_id = 1 AND teacher_t.teacher_id = 2);
+////////////////////////////////////////////////////
+
+
+
 
 
 delete
@@ -42,11 +70,26 @@ create table answer_t(
 answer_id int not null auto_increment primary key,
 answer varchar(30));
 
+
+//create table with foreign key
+
+///////////
 create table question_t(
 question_id int not null auto_increment primary key,
 question varchar(45),
 answer_id int not null,
 foreign key(answer_id) references answer_t(answer_id));
+
+//////////
+create table questionare_line_t(
+question_id int,
+admin_id int,
+rating_id int,
+constraint answer_id foreign key(question_id) references question_t(question_id),
+foreign key(admin_id) references admin_t(admin_id),
+foreign key(rating_id) references rating_t(rating_id)) engine=innodb;
+
+////////////////////////////////
 
 create table admin_t(
 admin_id int not null auto_increment primary key,
@@ -57,10 +100,194 @@ create table rating_line_t(
 rating_id int not null auto_increment primary key,
 score int not null);
 
-create table questionare_line_t(
-question_id int,
-admin_id int,
-rating_id int,
-constraint answer_id foreign key(question_id) references question_t(question_id),
-foreign key(admin_id) references admin_t(admin_id),
-foreign key(rating_id) references rating_t(rating_id)) engine=innodb;
+
+
+
+/////////////////////////////////////////             DATABASE CODE                /////////////////////////////////////////////////////////
+
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema rating_system
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema rating_system
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `rating_system` DEFAULT CHARACTER SET latin1 ;
+USE `rating_system` ;
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`admin_t` (
+  `admin_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `admin_username` VARCHAR(30) NOT NULL,
+  `admin_password` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`admin_id`));
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`student_t` (
+  `student_id` VARCHAR(8) NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `department` VARCHAR(6) NOT NULL,
+  `username` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`student_id`));
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`answer_t` (
+  `answer_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `answer` VARCHAR(30) NULL DEFAULT NULL,
+  `student_id` VARCHAR(7) NOT NULL,
+  PRIMARY KEY (`answer_id`),
+  CONSTRAINT `fk_answer_t_student_t1`
+    FOREIGN KEY (`student_id`)
+    REFERENCES `rating_system`.`student_t` (`student_id`));
+
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`question_t` (
+  `question_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `question` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`question_id`));
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`subject_t` (
+  `subject_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `subject_name` VARCHAR(30) NOT NULL,
+  `subject_section` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`subject_id`));
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`teacher_t` (
+  `teacher_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `teacher_name` VARCHAR(30) NOT NULL,
+  `department` VARCHAR(6) NOT NULL,
+  `username` VARCHAR(30) NOT NULL,
+  `password` VARCHAR(30) NOT NULL,
+  `user_type` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`teacher_id`));
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`subject_line_t` (
+  `teacher_id` INT(11) NOT NULL,
+  `subject_id` INT(11) NOT NULL,
+  `subject_line_id` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`subject_line_id`),
+  CONSTRAINT `fk_subject_line_t_subject_t1`
+    FOREIGN KEY (`subject_id`)
+    REFERENCES `rating_system`.`subject_t` (`subject_id`),
+  CONSTRAINT `fk_subject_line_t_teacher_t1`
+    FOREIGN KEY (`teacher_id`)
+    REFERENCES `rating_system`.`teacher_t` (`teacher_id`));
+
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`rating_line_t` (
+  `rating_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `score` INT(11) NOT NULL,
+  `student_id` VARCHAR(7) NOT NULL,
+  `subject_line_id` INT NOT NULL,
+  PRIMARY KEY (`rating_id`),
+  CONSTRAINT `fk_rating_line_t_student_t1`
+    FOREIGN KEY (`student_id`)
+    REFERENCES `rating_system`.`student_t` (`student_id`),
+  CONSTRAINT `fk_rating_line_t_subject_line_t1`
+    FOREIGN KEY (`subject_line_id`)
+    REFERENCES `rating_system`.`subject_line_t` (`subject_line_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `rating_system`.`questionare_line_t` (
+  `rating_id` INT(11) NOT NULL,
+  `question_id` INT(11) NOT NULL,
+  `admin_id` INT(11) NOT NULL,
+  CONSTRAINT `fk_questionare_line_t_admin_t1`
+    FOREIGN KEY (`admin_id`)
+    REFERENCES `rating_system`.`admin_t` (`admin_id`),
+  CONSTRAINT `fk_questionare_line_t_question_t1`
+    FOREIGN KEY (`question_id`)
+    REFERENCES `rating_system`.`question_t` (`question_id`),
+  CONSTRAINT `fk_questionare_line_t_rating_line_t1`
+    FOREIGN KEY (`rating_id`)
+    REFERENCES `rating_system`.`rating_line_t` (`rating_id`));
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////question code
+
+
+
+
+
+insert into question_t(question,type)
+values
+("Mastery of the Subject Matter","title"),
+("Explain's the lesson clearly","question"),
+("Share's with the class his/her readings related to the subject","question"),
+("Gives concrete exaple to the topic being discussed","question"),
+("Gives Examination that reflect the important points to the subject matter","question"),
+("Relates lessons to actual application/situation or to the other subjects whenever possible","question"),
+("Able to adjust his/her teachings strategy/method wherever the need arises","question"),
+("Answers satisfactorily raised by students","question"),
+("Incorporates the values in the lesson","question"),
+("Teaching Methodologies","title"),
+("Encourages challenging activities for discussion","question"),
+("Ask thought provoking questions with why or how and encourages student to think and to reason","question"),
+("Raises problems for cooperative work","question"),
+("Conducts reviews to the past lessons and link it to the previous one","question"),
+("Uses enough visual aid's to illustrate dificulties","question"),
+("Teaches with enthusiasm and dynamism","question"),
+("Explains objectives before the start of the lesson","question"),
+("Present lesson in pleasant and non-threatening manner","question"),
+("Connects the lesson to the other subjects","question"),
+("Allows student participation in planning class activities","question"),
+("Summarizes or Emphasizes major points of the lesson","question"),
+("Assigns in reading on actual research work","question"),
+("Make the lessons easier to understand","question"),
+("Uses English as a medium of instruction","question"),
+("Classroom Management and Discipline","title"),
+("Checks class attendance","question"),
+("Makes sure the students are attractive by posing questions and asking student's opinions","question"),
+("Encourages students to maintain classroom order and cleanliness","question"),
+("Enforces school/classroom rules and regulation","question"),
+("Prohibits students to out in groups during class","question"),
+("Starts the class with a faith nourishing activity, like prayer or reflection","question"),
+("Maintains a professional distance between the students in and outside the school","question"),
+("Conducts/calls for a consultation regarding performance","question"),
+("Punctuality","title"),
+("Promptly checks and returns the ","title1"),
+("a. test papers","question"),
+("b. projects","question"),
+("c. assignment","question"),
+("Provides feedback regarding the grade of the student after every term","question"),
+("Comes to the class on time","question"),
+("Ends class on time","question"),
+("Personal Qualities","title"),
+("Shows interest and concern in the students' welfare","question"),
+("Is sympathetic and kind to students in their problems and difficulties","question"),
+("Keeps confidential matters related to students' life","question"),
+("Is fair in his/her dealings with students","question"),
+("Is well-groomed and respectable","question");
