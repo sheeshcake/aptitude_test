@@ -11,5 +11,5 @@ WebDev Guidance Aptitude Test
 
 
 Please visit
-halfbyte.000webhostapp.com
+<a href='halfbyte.000webhostapp.com'>Aptitude Test</a>
 for testing
