@@ -54,7 +54,7 @@
 							echo "Something is very bad happened! :(";
 						}
 					}
-					$grand_total = ($ones + $twos + $threes + $fours + $fives)/(($ones)+($twos*2)+($threes*3)+($fours*4)+($fives*5));
+					$grand_total = (($ones)+($twos*2)+($threes*3)+($fours*4)+($fives*5))/($ones + $twos + $threes + $fours + $fives);
 					$query = "UPDATE rating_line_t SET score=" . $grand_total . " WHERE rating_id=" . $_SESSION['rate_id'];
 					if(!mysqli_query($conn,$query)){
 						echo "Something is very bad happened! :(";
@@ -77,6 +77,12 @@
 					$question_counter = 1;
 					$_SESSION['counter'] = 0;
 					echo "<form method='post'>";
+					echo "<h1>Rating Scale Values</h1>";
+					echo "<p>1 - Poor</p>";
+					echo "<p>2 - Average</p>";
+					echo "<p>3 - Good</p>";
+					echo "<p>4 - Very Good</p>";
+					echo "<p>5 - Excellent</p>";
 					// while($_SESSION['counter'] < 5){
 					while($row =mysqli_fetch_assoc($result)){
 						// $row = mysqli_fetch_assoc($result);
@@ -100,8 +106,8 @@
 							$_SESSION['counter']++;
 						}
 					}
-					echo "<input type='text' name='comment' placeholder='Comment' required>";
-					echo "<center><input type='button' name='done' value='SUBMIT'></center>";
+					echo "<center><textarea style='width: 80%;height: 300px;font-size: 20px;' name='comment' placeholder='Comment' required></textarea></center>";
+					echo "<center><input type='submit' style='width: 100%;height: 50px;' name='done' value='SUBMIT'></center>";
 					echo "</form>";
 				}
 				if(!isset($_POST['submit']) || isset($_POST['comment']) && !isset($_COOKIE['rate_id'])){
